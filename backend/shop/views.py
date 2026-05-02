@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-
+from django_filters.rest_framework import DjangoFilterBackend
 from shop.models import Category, Product
 from shop.serializers import CategorySerializer, ProductSerializer
 
@@ -14,3 +14,5 @@ class ProductViewSet(viewsets.ModelViewSet):
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['category']
