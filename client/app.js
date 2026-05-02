@@ -37,10 +37,20 @@ function renderProducts(data) {
     });
 }
 
-async function getData(categoryId = '') {
-    const url = categoryId
-        ? `${API_URL}/products/?category=${categoryId}`
-        : `${API_URL}/products/`;
+async function getData() {
+    const params = new URLSearchParams();
+    const categoryId = filter.value;
+    const query = searchInput.value.trim();
+
+    if (categoryId) {
+        params.append('category', categoryId);
+    }
+
+    if (query) {
+        params.append('search', query);
+    }
+
+    const url = `${API_URL}/products/${params.toString() ? `?${params}` : ''}`;
 
     const response = await fetch(url);
     const data = await response.json();
@@ -59,8 +69,17 @@ async function getCategories() {
 }
 
 filter.addEventListener('change', () => {
-    getData(filter.value);
+    getData();
 });
 
+let searchTimeout = null;
+const searchInput = document.getElementById('search-input');
+
+searchInput.addEventListener('input', () => {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+        getData();
+    }, 300);
+});
 getCategories();
 getData();
