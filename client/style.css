@@ -77,3 +77,27 @@ h2 {
 .product-card .price::after {
     content: "UZS"; /* Добавим валюту */
 }
+.empty-message {
+    grid-column: 1 / -1;
+    margin: 20px 0;
+    text-align: center;
+    color: #6b7280;
+}
+
+#category-filter {
+    display: block;
+    width: min(100%, 320px);
+    margin: 0 auto 24px;
+    padding: 10px 12px;
+    border: 1px solid #d6dde1;
+    border-radius: 8px;
+    background: #fff;
+    color: #2c3e50;
+    font: inherit;
+}
+
+.product-card .category {
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin: 0;
+}
